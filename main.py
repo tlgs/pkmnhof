@@ -2,7 +2,7 @@ import argparse
 import base64
 import io
 
-from PIL import Image
+from PIL import Image, ImageShow
 
 from dump import pokedex
 
@@ -36,6 +36,12 @@ if __name__ == "__main__":
         y = i // args.columns
         tmp.paste(images[i], (side * x, side * y))
 
-    final = Image.new(mode="RGBA", size=(side * args.columns, side * (6 // args.columns)), color="#fbfbf9")
+    final = Image.new(
+        mode="RGBA",
+        size=(side * args.columns, side * (6 // args.columns)),
+        color="#fbfbf9",
+    )
     final.alpha_composite(tmp)
-    final.show()
+
+    ImageShow.register(ImageShow.EogViewer, 0)
+    ImageShow.show(final)
