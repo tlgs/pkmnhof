@@ -16,7 +16,7 @@ if __name__ == "__main__":
     if not all(0 < x < 152 for x in args.numbers):
         raise ValueError
 
-    if args.resize is not None and (args.resize < 1 or args.resize > 8):
+    if args.resize is not None and not (1 <= args.resize <= 8):
         raise ValueError
 
     images = [
@@ -29,14 +29,10 @@ if __name__ == "__main__":
         for j, im in enumerate(images):
             images[j] = im.resize(size=(side, side))
 
-    tmp = Image.new(mode="RGBA", size=(side * 3, side * 2))
-    tmp.paste(images[0], (0, 0))
-    tmp.paste(images[1], (side, 0))
-    tmp.paste(images[2], (side * 2, 0))
-    tmp.paste(images[3], (0, side))
-    tmp.paste(images[4], (side, side))
-    tmp.paste(images[5], (side * 2, side))
+    tmp = Image.new(mode="RGBA", size=(side * 6, side))
+    for i in range(6):
+        tmp.paste(images[i], (side * i, 0))
 
-    final = Image.new(mode="RGBA", size=(side * 3, side * 2), color="#fbfbf9")
+    final = Image.new(mode="RGBA", size=(side * 6, side), color="#fbfbf9")
     final.alpha_composite(tmp)
     final.show()
