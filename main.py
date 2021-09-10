@@ -11,6 +11,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("numbers", nargs=6, type=int, metavar="N")
     parser.add_argument("-r", "--resize", type=float)
+    parser.add_argument("-c", "--columns", default=6, type=int, choices=[6, 3, 2, 1])
     args = parser.parse_args()
 
     if not all(0 < x < 152 for x in args.numbers):
@@ -29,10 +30,12 @@ if __name__ == "__main__":
         for j, im in enumerate(images):
             images[j] = im.resize(size=(side, side))
 
-    tmp = Image.new(mode="RGBA", size=(side * 6, side))
+    tmp = Image.new(mode="RGBA", size=(side * args.columns, side * (6 // args.columns)))
     for i in range(6):
-        tmp.paste(images[i], (side * i, 0))
+        x = i % args.columns
+        y = i // args.columns
+        tmp.paste(images[i], (side * x, side * y))
 
-    final = Image.new(mode="RGBA", size=(side * 6, side), color="#fbfbf9")
+    final = Image.new(mode="RGBA", size=(side * args.columns, side * (6 // args.columns)), color="#fbfbf9")
     final.alpha_composite(tmp)
     final.show()
