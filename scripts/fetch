@@ -1,13 +1,17 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Usage: ./fetch > file.py
 
+sprite() {
+  echo -n '    "'
+  curl curl -s --output - "https://www.serebii.net/pokearth/sprites/rb/$1.png" \
+    | base64 -w 0
+  echo '",'
+}
+
+export -f sprite
+
 echo 'pokedex = ['
 seq -f '%03.0f' 1 151 \
-  | xargs \
-    -I {} \
-    sh -c "echo -n '    \"' \
-           && curl -s --output - https://www.serebii.net/pokearth/sprites/rb/{}.png \
-           | base64 -w 0 \
-           && echo '\",'"
+  | xargs -I {} bash -c "sprite {}"
 echo ']'
