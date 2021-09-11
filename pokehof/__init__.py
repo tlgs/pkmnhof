@@ -20,15 +20,14 @@ def main():
     if args.resize is not None and not (1 <= args.resize <= 8):
         raise ValueError
 
-    images = [
-        Image.open(io.BytesIO(base64.b64decode(pokedex[n - 1]))) for n in args.numbers
-    ]
-
     side = 60 if args.resize is None else int(60 * args.resize)
 
-    if args.resize is not None:
-        for j, im in enumerate(images):
-            images[j] = im.resize(size=(side, side))
+    images = [
+        Image.open(io.BytesIO(base64.b64decode(pokedex[n - 1]))).resize(
+            size=(side, side)
+        )
+        for n in args.numbers
+    ]
 
     tmp = Image.new(mode="RGBA", size=(side * args.columns, side * (6 // args.columns)))
     for i in range(6):
@@ -43,7 +42,7 @@ def main():
     )
     final.alpha_composite(tmp)
 
-    ImageShow.register(ImageShow.EogViewer, 0)
+    ImageShow.register(ImageShow.EogViewer, 0)  # prefer `eog` over `display`
     ImageShow.show(final)
 
 
