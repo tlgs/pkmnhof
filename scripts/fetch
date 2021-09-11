@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+# Usage: ./fetch > file.py
+
+echo 'pokedex = ['
+seq -f '%03.0f' 1 151 \
+  | xargs \
+    -I {} \
+    sh -c "echo -n '    \"' \
+           && curl -s --output - https://www.serebii.net/pokearth/sprites/rb/{}.png \
+           | base64 -w 0 \
+           && echo '\",'"
+echo ']'
