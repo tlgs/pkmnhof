@@ -4,10 +4,10 @@ import io
 
 from PIL import Image, ImageShow
 
-from dump import pokedex
+from pokehof.dex import pokedex
 
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("numbers", nargs=6, type=int, metavar="N")
     parser.add_argument("-r", "--resize", type=float)
@@ -45,3 +45,7 @@ if __name__ == "__main__":
 
     ImageShow.register(ImageShow.EogViewer, 0)
     ImageShow.show(final)
+
+
+if __name__ == "__main__":
+    main()
