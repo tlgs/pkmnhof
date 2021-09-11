@@ -18,3 +18,8 @@ optional arguments:
   -r RESIZE, --resize RESIZE
   -c {6,3,2,1}, --columns {6,3,2,1}
 ```
+
+## Disclaimer
+
+© 1995–2021 Nintendo/Creatures Inc./GAME FREAK inc. Pokémon
+are trademarks of Nintendo.
