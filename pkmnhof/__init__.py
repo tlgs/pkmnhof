@@ -46,7 +46,7 @@ def main():
     final = Image.new(
         mode="RGBA",
         size=(side * args.columns, side * (6 // args.columns)),
-        color="#fbfbf9",
+        color="#ffffff",
     )
     final.alpha_composite(tmp)
 
