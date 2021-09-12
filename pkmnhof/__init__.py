@@ -5,13 +5,21 @@ import tarfile
 from PIL import Image, ImageShow
 
 
-def load_pokedex(gen=1):
-    m = {1: "rb"}
+class Pokedex:
+    def __init__(self, gen):
+        self.gen = gen
+        self.tar = self._load_archive(gen)
 
-    pkg = importlib.resources.files("pkmnhof")
-    archive = tarfile.open(pkg / "data" / f"{m[gen]}.tar.gz", mode="r:gz")
+    def __getitem__(self, key):
+        return self.tar.extractfile(f"{key:03d}.png")
 
-    return archive
+    def _load_archive(self, gen):
+        m = {1: "rb"}
+
+        pkg = importlib.resources.files("pkmnhof")
+        archive = tarfile.open(pkg / "data" / f"{m[gen]}.tar.gz", mode="r:gz")
+
+        return archive
 
 
 def main():
@@ -24,18 +32,15 @@ def main():
     if not all(0 < x < 152 for x in args.numbers):
         raise ValueError
 
-    if args.resize is not None and not (1 <= args.resize <= 8):
+    if args.resize is not None and not (1 <= args.resize <= 3):
         raise ValueError
-
-    pokedex = load_pokedex()
 
     # default size should probably not be hardcoded
     side = 60 if args.resize is None else int(60 * args.resize)
 
-    images = [
-        Image.open(pokedex.extractfile(f"{n:03d}.png")).resize(size=(side, side))
-        for n in args.numbers
-    ]
+    pokedex = Pokedex(1)
+
+    images = [Image.open(pokedex[n]).resize(size=(side, side)) for n in args.numbers]
 
     tmp = Image.new(mode="RGBA", size=(side * args.columns, side * (6 // args.columns)))
     for i in range(6):
