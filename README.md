@@ -1,14 +1,14 @@
-# pokehof
+# pkmnhof
 
 ![Example image](assets/example.png)
 
-pokehof is a _Pokémon Hall of Fame_ image generator for Gen 1.
+pkmnhof is a _Pokémon Hall of Fame_ image generator for Gen 1.
 
 ## Usage
 
 ```console
-$ pokehof -h
-usage: pokehof [-h] [-r RESIZE] [-c {6,3,2,1}] N N N N N N
+$ pkmnhof -h
+usage: pkmnhof [-h] [-r RESIZE] [-c {6,3,2,1}] N N N N N N
 
 positional arguments:
   N

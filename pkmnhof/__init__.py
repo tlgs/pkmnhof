@@ -4,7 +4,7 @@ import io
 
 from PIL import Image, ImageShow
 
-from pokehof.dex import pokedex
+from pkmnhof.dex import pokedex
 
 
 def main():
