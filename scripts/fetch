@@ -8,6 +8,8 @@ unset tmpdir
 trap '[[ $tmpdir ]] && rm -rf "$tmpdir"' EXIT
 tmpdir=$(mktemp -d)
 
+cp "../assets/frame.png" "$tmpdir/frame.png"
+
 pushd "$tmpdir" || exit
 
 for i in {1..151}; do
@@ -16,7 +18,7 @@ for i in {1..151}; do
   curl -s "https://www.serebii.net/pokearth/sprites/rb/$fmt_i.png" -o "$fmt_i.png"
   echo " DONE"
 done
-tar cf rb.tar ./*.png
+tar cf rb.tar -- *.png
 gzip rb.tar
 
 popd || exit
