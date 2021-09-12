@@ -8,6 +8,7 @@
 sprite() {
   echo -n '    "'
   curl curl -s "https://www.serebii.net/pokearth/sprites/rb/$1.png" \
+    | gzip \
     | base64 -w 0
   echo '",'
 }

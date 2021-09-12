@@ -1,5 +1,6 @@
 import argparse
 import base64
+import gzip
 import io
 
 from PIL import Image, ImageShow
@@ -23,9 +24,9 @@ def main():
     side = 60 if args.resize is None else int(60 * args.resize)
 
     images = [
-        Image.open(io.BytesIO(base64.b64decode(pokedex[n - 1]))).resize(
-            size=(side, side)
-        )
+        Image.open(
+            io.BytesIO(gzip.decompress(base64.b64decode(pokedex[n - 1])))
+        ).resize(size=(side, side))
         for n in args.numbers
     ]
 
