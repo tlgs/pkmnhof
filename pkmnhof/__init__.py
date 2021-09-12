@@ -1,11 +1,17 @@
 import argparse
-import base64
-import gzip
-import io
+import importlib.resources
+import tarfile
 
 from PIL import Image, ImageShow
 
-from pkmnhof.dex import pokedex
+
+def load_pokedex(gen=1):
+    m = {1: "rb"}
+
+    pkg = importlib.resources.files("pkmnhof")
+    archive = tarfile.open(pkg / "data" / f"{m[gen]}.tar.gz", mode="r:gz")
+
+    return archive
 
 
 def main():
@@ -21,12 +27,13 @@ def main():
     if args.resize is not None and not (1 <= args.resize <= 8):
         raise ValueError
 
+    pokedex = load_pokedex()
+
+    # default size should probably not be hardcoded
     side = 60 if args.resize is None else int(60 * args.resize)
 
     images = [
-        Image.open(
-            io.BytesIO(gzip.decompress(base64.b64decode(pokedex[n - 1])))
-        ).resize(size=(side, side))
+        Image.open(pokedex.extractfile(f"{n:03d}.png")).resize(size=(side, side))
         for n in args.numbers
     ]
 
