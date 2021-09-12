@@ -8,7 +8,7 @@ pkmnhof is a _Pokémon Hall of Fame_ image generator for Gen 1.
 
 ```console
 $ pkmnhof -h
-usage: pkmnhof [-h] [-r RESIZE] [-c {6,3,2,1}] N N N N N N
+usage: pkmnhof [-h] [-r RESIZE] N N N N N N
 
 positional arguments:
   N
@@ -16,7 +16,6 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   -r RESIZE, --resize RESIZE
-  -c {6,3,2,1}, --columns {6,3,2,1}
 ```
 
 ## Disclaimer
