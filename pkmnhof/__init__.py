@@ -30,6 +30,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("numbers", nargs=6, type=int, metavar="N")
     parser.add_argument("-r", "--resize", default=1, type=float)
+    parser.add_argument("-o", "--output")
     parser.add_argument(
         "--version", action="version", version=f"pkmnhof, version {__version__}"
     )
@@ -59,8 +60,11 @@ def main():
     )
     final = Image.alpha_composite(background, tmp)
 
-    ImageShow.register(ImageShow.EogViewer, 0)  # prefer `eog` over `display`
-    ImageShow.show(final)
+    if args.output is not None:
+        final.save(args.output)
+    else:
+        ImageShow.register(ImageShow.EogViewer, 0)  # prefer `eog` over `display`
+        ImageShow.show(final)
 
 
 if __name__ == "__main__":
