@@ -29,8 +29,9 @@ class Pokedex:
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("numbers", nargs=6, type=int, metavar="N")
-    parser.add_argument("-r", "--resize", default=1, type=float)
     parser.add_argument("-o", "--output")
+    parser.add_argument("-r", "--resize", default=1, type=float)
+    parser.add_argument("--no-frame", action="store_true")
     parser.add_argument(
         "--version", action="version", version=f"pkmnhof, version {__version__}"
     )
@@ -49,15 +50,20 @@ def main():
     tmp = Image.new(mode="RGBA", size=(pad * 2 + side * 6, pad * 2 + side))
     for i, n in enumerate(args.numbers):
         tmp.paste(
-            Image.open(pokedex[n]).resize((side, side)),
-            box=(pad + side * i, pad),
+            Image.open(pokedex[n]).resize((side, side)), box=(pad + side * i, pad)
         )
 
-    background = (
-        Image.open(pokedex.frame)
-        .convert("RGBA")
-        .resize((pad * 2 + side * 6, pad * 2 + side))
-    )
+    if args.no_frame:
+        background = Image.new(
+            mode="RGBA", size=(pad * 2 + side * 6, pad * 2 + side), color="#ffffff"
+        )
+    else:
+        background = (
+            Image.open(pokedex.frame)
+            .convert("RGBA")
+            .resize((pad * 2 + side * 6, pad * 2 + side))
+        )
+
     final = Image.alpha_composite(background, tmp)
 
     if args.output is not None:
