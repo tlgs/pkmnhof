@@ -1,8 +1,11 @@
 import argparse
+import importlib.metadata
 import importlib.resources
 import tarfile
 
 from PIL import Image, ImageShow
+
+__version__ = importlib.metadata.version("pkmnhof")
 
 
 class Pokedex:
@@ -27,6 +30,9 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("numbers", nargs=6, type=int, metavar="N")
     parser.add_argument("-r", "--resize", default=1, type=float)
+    parser.add_argument(
+        "--version", action="version", version=f"pkmnhof, version {__version__}"
+    )
     args = parser.parse_args()
 
     if not all(0 < x < 152 for x in args.numbers):
