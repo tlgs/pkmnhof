@@ -18,12 +18,15 @@ def main(output, resize, no_frame, nums):
     tmp = Image.new(mode="RGBA", size=(pad * 2 + side * 6, pad * 2 + side))
     for i, n in enumerate(nums):
         tmp.paste(
-            Image.open(pokedex[n]).resize((side, side)), box=(pad + side * i, pad)
+            im=Image.open(pokedex[n]).resize((side, side)),
+            box=(pad + side * i, pad),
         )
 
     if no_frame:
         background = Image.new(
-            mode="RGBA", size=(pad * 2 + side * 6, pad * 2 + side), color="#ffffff"
+            mode="RGBA",
+            size=(pad * 2 + side * 6, pad * 2 + side),
+            color="#ffffff",
         )
     else:
         background = (
