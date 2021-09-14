@@ -20,7 +20,7 @@ Options:
 
 For example, running `pkmnhof --no-frame 18 65 112 103 130 6` will display the following image:
 
-![example image](assets/rival.png)
+![example image](assets/example.png)
 
 ## Disclaimer
 
