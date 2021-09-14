@@ -13,17 +13,21 @@ tmpdir=$(mktemp -d)
 
 cp "../assets/frame.png" "$tmpdir/frame.png"
 
-pushd "$tmpdir" || exit
+pushd "$tmpdir" >/dev/null || exit
 
-for i in {1..151}; do
-  fmt_i=$(printf '%03d' "$i")
-  echo -n "https://www.serebii.net/pokearth/sprites/rb/$fmt_i.png"
-  curl -s "https://www.serebii.net/pokearth/sprites/rb/$fmt_i.png" -o "$fmt_i.png"
-  echo " DONE"
+echo -n 'fetching sprites from serebii.net... 000/151'
+for i in $(seq -w 151); do
+  echo -n -e "\b\b\b\b\b\b\b$i/151"
+  curl -s "https://www.serebii.net/pokearth/sprites/rb/$i.png" -o "$i.png"
 done
+echo
+
+echo 'bundling files...'
 tar cf rb.tar -- *.png
 gzip rb.tar
 
-popd || exit
+popd >/dev/null || exit
 
 mv "$tmpdir/rb.tar.gz" "../pkmnhof/data/rb.tar.gz"
+
+echo 'done'
