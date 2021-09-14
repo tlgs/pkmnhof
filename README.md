@@ -1,6 +1,6 @@
 # pkmnhof
 
-![Example image](assets/example.png)
+![project banner](assets/banner.png)
 
 pkmnhof is a _Pokémon Hall of Fame_ image generator for Gen 1.
 
@@ -17,6 +17,10 @@ Options:
   --version                 Show the version and exit.
   -h, --help                Show this message and exit.
 ```
+
+For example, running `pkmnhof --no-frame 18 65 112 103 130 6` will display the following image:
+
+![example image](assets/rival.png)
 
 ## Disclaimer
 
