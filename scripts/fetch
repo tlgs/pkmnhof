@@ -1,5 +1,8 @@
 #!/bin/bash
 #
+# Fetches sprites from serebii.net and bundles them nicely in a
+# gzipped tarball suitable for Python package data.
+#
 # Usage: ./fetch
 
 cd "${BASH_SOURCE%/*}/" || exit
