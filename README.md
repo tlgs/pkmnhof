@@ -1,6 +1,6 @@
 # pkmnhof
 
-![project banner](assets/banner.png)
+![project banner](assets/docs/banner.png)
 
 pkmnhof is a _Pokémon Hall of Fame_ image generator for Gen 1.
 
@@ -12,7 +12,8 @@ Usage: pkmnhof [OPTIONS] NUMS...
 
   Display an image containing a Pokémon team.
 
-  NUMS are 6 integers representing each Pokémon's National Pokédex number.
+  NUMS represent each Pokémon's National Pokédex number. Optionally use '_'
+  for an empty slot.
 
 Options:
   -o, --output FILE         Save image to a file instead of displaying it.
@@ -23,9 +24,17 @@ Options:
   -h, --help                Show this message and exit.
 ```
 
-For example, running `pkmnhof --no-frame 18 65 112 103 130 6` will display the following image:
+### Examples
 
-![example image](assets/example.png)
+1. `pkmnhof --no-frame 18 65 112 103 130 6` will display the following image:
+
+    ![example image 1](assets/docs/example1.png)
+
+2. `pkmnhof --output team.png 87 91 80 124 131 _` will save the following image to `team.png`:
+
+    ![example image 2](assets/docs/example2.png)
+
+3. `pkmnhof --resize 2 25 1 7 6 12 17` was used to generate this README's banner.
 
 ## Disclaimer
 
