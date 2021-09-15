@@ -5,12 +5,27 @@ from pkmnhof import Pokedex, __version__
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
-@click.option("-o", "--output", type=click.Path(dir_okay=False))
-@click.option("-r", "--resize", type=click.FloatRange(1, 3), default=1)
-@click.option("--no-frame", is_flag=True)
+@click.option(
+    "-o",
+    "--output",
+    type=click.Path(dir_okay=False),
+    help="Save image to a file instead of displaying it.",
+)
+@click.option(
+    "-r",
+    "--resize",
+    type=click.FloatRange(1, 3),
+    default=1,
+    help="Resize original image (mainting its aspect ratio).",
+)
+@click.option("--no-frame", is_flag=True, help="Create image without a frame.")
 @click.version_option(version=__version__)
 @click.argument("nums", type=int, nargs=6)
 def main(output, resize, no_frame, nums):
+    """Display an image containing a Pokémon team.
+
+    NUMS are 6 integers representing each Pokémon's National Pokédex number.
+    """
     pokedex = Pokedex()
 
     pad = int(9 * resize)
