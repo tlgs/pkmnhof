@@ -7,7 +7,7 @@ from pkmnhof import Pokedex, __version__
 
 
 def validate_nums(ctx, param, value):
-    r"""Validate the NUMS argumen - accepted values are any positive integer or `_`.
+    r"""Validate the NUMS argumen - accepted values are any positive integer or '_'.
 
     The pattern ^d*[1-9]\d*$ exclusively matches positive integers.
     """
