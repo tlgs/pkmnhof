@@ -1,7 +1,21 @@
+import re
+
 import click
 from PIL import Image, ImageShow
 
 from pkmnhof import Pokedex, __version__
+
+
+def validate_nums(ctx, param, value):
+    r"""Validate the NUMS argumen - accepted values are any positive integer or `_`.
+
+    The pattern ^d*[1-9]\d*$ exclusively matches positive integers.
+    """
+    for x in value:
+        if re.fullmatch(r"^(\d*[1-9]\d*|_)$", x) is None:
+            raise click.BadParameter(f"'{x}' should be a positive integer or '_'.")
+
+    return value
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
@@ -20,11 +34,12 @@ from pkmnhof import Pokedex, __version__
 )
 @click.option("--no-frame", is_flag=True, help="Create image without a frame.")
 @click.version_option(version=__version__)
-@click.argument("nums", type=int, nargs=6)
+@click.argument("nums", nargs=6, callback=validate_nums)
 def main(output, resize, no_frame, nums):
     """Display an image containing a Pokémon team.
 
-    NUMS are 6 integers representing each Pokémon's National Pokédex number.
+    NUMS represent each Pokémon's National Pokédex number.
+    Optionally use '_' for an empty slot.
     """
     pokedex = Pokedex()
 
@@ -32,8 +47,11 @@ def main(output, resize, no_frame, nums):
     side = int(60 * resize)
     tmp = Image.new(mode="RGBA", size=(pad * 2 + side * 6, pad * 2 + side))
     for i, n in enumerate(nums):
+        if n == "_":
+            continue
+
         tmp.paste(
-            im=Image.open(pokedex[n]).resize((side, side)),
+            im=Image.open(pokedex[int(n)]).resize((side, side)),
             box=(pad + side * i, pad),
         )
 
