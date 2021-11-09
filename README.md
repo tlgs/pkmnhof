@@ -8,7 +8,7 @@ pkmnhof is a _Pokémon Hall of Fame_ image generator for Gen 1.
 
 - generate custom Pokémon team images using official sprites
 - learn about Python's modern packaging techniques
-- get some experience developing Python CLI applications
+- obtain some experience building Python CLI applications
 
 ## Usage
 
