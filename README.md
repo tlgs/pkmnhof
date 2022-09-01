@@ -42,6 +42,10 @@ Options:
 
 3. `pkmnhof --resize 2 25 1 7 6 12 17` was used to generate this README's banner.
 
+## Development
+
+- install and setup project with `pip install -e .[dev]` and `pre-commit install`
+
 ## Disclaimer
 
 © 1995–2021 Nintendo/Creatures Inc./GAME FREAK inc. Pokémon

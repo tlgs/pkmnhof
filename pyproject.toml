@@ -1,5 +1,37 @@
-[build-system]
-requires = ["setuptools", "wheel", "setuptools_scm"]
-build-backend = "setuptools.build_meta"
+[project]
+name = "pkmnhof"
+description = "Pokémon Hall of Fame image generator"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "Unlicense"
+authors = [
+  { name = "Tiago Seabra", email = "tlgs@users.noreply.github.com" },
+]
+classifiers = [
+  "License :: OSI Approved :: The Unlicense (Unlicense)",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+]
+dynamic = ["version"]
 
-[tool.setuptools_scm]
+urls = { Homepage = "https://github.com/tlgs/pkmnhof" }
+
+dependencies = [
+  "Pillow~=8.3",
+  "click~=8.0",
+]
+
+[project.optional-dependencies]
+dev = ["pre-commit"]
+
+[project.scripts]
+pkmnhof = "pkmnhof.__main__:main"
+
+
+[tool.hatch.version]
+source = "vcs"
+
+
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"

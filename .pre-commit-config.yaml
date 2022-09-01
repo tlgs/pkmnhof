@@ -1,19 +1,18 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.1.0
+    rev: v4.3.0
     hooks:
       - id: check-added-large-files
       - id: end-of-file-fixer
       - id: trailing-whitespace
 
   - repo: https://github.com/psf/black
-    rev: 21.12b0
+    rev: 22.8.0
     hooks:
       - id: black
-        args: ['--target-version=py310']
 
   - repo: https://github.com/PyCQA/flake8
-    rev: 4.0.1
+    rev: 5.0.4
     hooks:
       - id: flake8
         args: ['--max-line-length=88', '--extend-ignore=E203']
@@ -23,12 +22,7 @@ repos:
     rev: 5.10.1
     hooks:
       - id: isort
-        args: ['--profile black']
-
-  - repo: https://github.com/asottile/setup-cfg-fmt
-    rev: v1.20.0
-    hooks:
-      - id: setup-cfg-fmt
+        args: ['--profile=black']
 
   - repo: https://github.com/koalaman/shellcheck-precommit
     rev: v0.8.0
@@ -36,7 +30,7 @@ repos:
       - id: shellcheck
 
   - repo: https://github.com/scop/pre-commit-shfmt
-    rev: v3.4.2-1
+    rev: v3.5.1-1
     hooks:
       - id: shfmt
-        args: [-w, -i=2, -ci, -bn, -sr]
+        args: ['-w', '-i=2', '-ci', '-bn', '-sr']

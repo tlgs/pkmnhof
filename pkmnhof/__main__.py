@@ -76,6 +76,8 @@ def main(output, resize, no_frame, nums):
         ImageShow.register(ImageShow.EogViewer, 0)  # prefer `eog` over `display`
         ImageShow.show(final)
 
+    return 0
+
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
