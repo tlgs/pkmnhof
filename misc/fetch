@@ -13,7 +13,7 @@ tmpdir=$(mktemp -d)
 
 cp "../assets/frame.png" "$tmpdir/frame.png"
 
-pushd "$tmpdir" > /dev/null || exit
+pushd "$tmpdir" >/dev/null || exit
 
 echo -n 'fetching sprites from serebii.net... 000/151'
 for i in $(seq -w 151); do
@@ -26,7 +26,7 @@ echo 'bundling files...'
 tar cf rb.tar -- *.png
 gzip rb.tar
 
-popd > /dev/null || exit
+popd >/dev/null || exit
 
 mv "$tmpdir/rb.tar.gz" "../pkmnhof/data/rb.tar.gz"
 
